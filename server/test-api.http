@@ -1,0 +1,175 @@
+# This file could be used for testing the API with Visual Studio Code
+
+## Retrieving all the page.
+GET http://localhost:3001/api/pages HTTP/1.1
+###
+
+## Retrieving all the pubblicated page.
+GET http://localhost:3001/api/pubPages HTTP/1.1
+###
+
+## Retrieving speicific page.
+GET http://localhost:3001/api/pages/7 HTTP/1.1
+###
+
+## Login admin
+POST http://localhost:3001/api/sessions
+content-type: application/json
+
+{
+    "username": "t1@test.it",
+    "password": "pass"
+}
+###
+
+## Login utente
+POST http://localhost:3001/api/sessions
+content-type: application/json
+
+{
+    "username": "t2@test.it",
+    "password": "pass"
+}
+###
+
+## Add a page
+POST http://localhost:3001/api/pages HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Test",
+    "author": 1,
+    "creationDate": "2023-06-05",
+    "pubblicationDate": null,
+    "content": [
+      {
+        "type": "Header",
+        "name": "Header1",
+        "value": "Homepageheader"
+      },
+      {
+        "type": "Image",
+        "name": "Image2",
+        "value": "img4.jpeg"
+      },
+      {
+        "type": "Image",
+        "name": "Image3",
+        "value": "img2.jpeg"
+      }
+    ]
+}
+###
+
+## Add a wrong page
+POST http://localhost:3001/api/pages HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Test",
+    "author": 1,
+    "creationDate": "2023-06-05",
+    "pubblicationDate": null,
+    "content": [
+      {
+        "type": "Header",
+        "name": "Header1",
+        "value": "Homepageheader"
+      },
+      {
+        "type": "Image",
+        "name": "Image2",
+        "value": "img4.jpeg"
+      },
+      {
+        "type": "Image",
+        "name": "Image3",
+        "value": "img2.jpeg"
+      }
+    ]
+}
+###
+
+## Update page
+PUT http://localhost:3001/api/pages/39 HTTP/1.1
+content-type: application/json
+
+{
+    "id": 38,
+    "title": "Test modificato",
+    "author": 1,
+    "creationDate": "2023-06-05",
+    "pubblicationDate": "",
+    "content": [
+      {
+        "type": "Header",
+        "name": "Header1",
+        "value": "Homepageheader"
+      },
+      {
+        "type": "Image",
+        "name": "Image2",
+        "value": "img4.jpeg"
+      },
+      {
+        "type": "Image",
+        "name": "Image3",
+        "value": "img2.jpeg"
+      }
+    ]
+}
+###
+
+## Update wrong page
+PUT http://localhost:3001/api/pages/40 HTTP/1.1
+content-type: application/json
+
+{
+    "id": 40,
+    "title": "Test modificato",
+    "author": 1,
+    "creationDate": "2023-06-05",
+    "pubblicationDate": null,
+    "content": [
+      {
+        "type": "Header",
+        "name": "Header1",
+        "value": "Homepageheader"
+      },
+      {
+        "type": "Image",
+        "name": "Image2",
+        "value": "img4.jpeg"
+      },
+      {
+        "type": "Image",
+        "name": "Image3",
+        "value": "img2.jpeg"
+      }
+    ]
+}
+###
+
+## Delete page
+DELETE http://localhost:3001/api/pages/39 HTTP/1.1
+###
+
+## Get site name
+GET http://localhost:3001/api/get-name HTTP/1.1
+###
+
+## Modify site name
+PUT http://localhost:3001/api/modify-name/CMSmall HTTP/1.1
+###
+
+## Get image
+GET http://localhost:3001/api/images/ HTTP/1.1
+###
+
+### Get users
+GET http://localhost:3001/api/users HTTP/1.1
+###
+
+### Get logged user
+GET http://localhost:3001/api/sessions/current HTTP/1.1
+###
