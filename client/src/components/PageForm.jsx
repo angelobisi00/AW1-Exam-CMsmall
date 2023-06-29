@@ -12,6 +12,9 @@ const PageForm = (props) => {
 
   const [errorMsg, setErrorMsg] = useState('');
 
+  // stato che contiene tutti gli utenti in modo da permettere agli admin di cambiare l'autore della pagina
+  const [users, setUsers] = useState([]);
+
   const [title, setTitle] = useState(props.page ? props.page.title : '');
   const [author, setAuthor] = useState(props.page ? props.page.author : props.user.id);
   const [creationDate, setCreationDate] = useState(props.page ? props.page.creationDate : dayjs().format('YYYY-MM-DD'));
@@ -20,6 +23,11 @@ const PageForm = (props) => {
   const [contentList, setContentList] = useState(props.page ? props.page.content : []);
   // tipo del nuovo content da aggiungere alla pagina
   const [newContent, setNewContent] = useState('');
+
+  useEffect(() => {
+    API.getUsers()
+      .then(users => setUsers(users))
+  }, []);
 
   useEffect(() => {
     const page = {
@@ -122,8 +130,8 @@ const PageForm = (props) => {
         <Form.Group className="mb-3">
           <Form.Label>Author</Form.Label>
           <Form.Select value={author} required={true} disabled={/*(props.page? false : true)||*/(props.user.amministratore != true)} onChange={event => setAuthor(event.target.value)} >
-          {props.users.map((u, i) =>{
-            return <option defaultValue={props.page ? u.id == author : u.email == author}
+          {users.map((u, i) =>{
+            return <option defaultValue={props.page ? u.email == author : u.email == author}
               /*selected={props.page ? u.id == author : u.id == author}*/
               key={i} value={u.id}>{u.email}</option>
           })}

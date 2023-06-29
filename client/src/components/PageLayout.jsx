@@ -16,7 +16,7 @@ function DefaultLayout(props) {
       <Row className="vh-100">
         <Col md={2} xl={3} bg="light" className="below-nav" id="left-sidebar">
           {page ? 
-            <PageInfo page={page} users={props.users} setPopUpPage={props.setPopUpPage}/> 
+            <PageInfo page={page} setPopUpPage={props.setPopUpPage}/> 
             : ''
           }
         </Col>
@@ -36,13 +36,9 @@ function MainLayout(props) {
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
-    if(props.dirty || props.loggedIn || !props.loggedIn){ // cosi cambia ogni volta che un utente si logga o si slogga
+    // if((props.dirty) || (props.dirty && props.loggedIn) || (!props.loggedIn)){ // cosi cambia ogni volta che un utente si logga o si slogga
       // per non avere la lista completa nel client quando non siamo loggati
-
-      API.getUsers()
-        .then(users => props.setUsers(users))
-        .catch(err => handleErrors(err));
-
+      if(props.dirty || !props.loggedIn || props.loggedIn){
       API.getSiteName()
         .then(name => props.setSiteName(name))
         .catch(err => handleErrors(err));
@@ -219,7 +215,7 @@ function AddLayout(props) {
   }
 
   return (
-    <PageForm user={props.user} users={props.users} addPage={addPage} setPopUpPage={props.setPopUpPage} />
+    <PageForm user={props.user} addPage={addPage} setPopUpPage={props.setPopUpPage} />
   )
 }
 
@@ -271,7 +267,7 @@ function EditLayout(props) {
   }
 
   return (
-    page ? <PageForm user={props.user} users={props.users} page={page} editPage={editPage} setPopUpPage={props.setPopUpPage} /> : <><p>Pagina non presente</p></>
+    page ? <PageForm user={props.user} page={page} editPage={editPage} setPopUpPage={props.setPopUpPage} /> : <><p>Pagina non presente</p></>
   );
 }
 

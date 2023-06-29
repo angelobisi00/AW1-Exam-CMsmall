@@ -35,7 +35,7 @@ function PageInfo(props) {
             {/* Author */}
             <Form.Group className="mb-3">
               <Form.Label>Author</Form.Label>
-              <Form.Control type="text" disabled defaultValue={props.users.find(user => user.id === props.page.author)?.email} />
+              <Form.Control type="text" disabled defaultValue={props.page.author} />
             </Form.Group>
 
             {/* Creation date */}

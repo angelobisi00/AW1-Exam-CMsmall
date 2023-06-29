@@ -28,9 +28,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState(undefined);
 
-  // This state contain all the registered users
-  const [users, setUsers] = useState([]);
-
   // This state is used for displaying pages information and preview
   const [popUpPage, setPopUpPage] = useState(undefined);
 
@@ -91,15 +88,15 @@ function App() {
         <Container fluid className="App">
           <Navigation user={user} logout={doLogOut} siteName={siteName} setPopUpPage={setPopUpPage}/>
           <Routes>
-            <Route path="/" element={ <DefaultLayout users={users} popUpPage={popUpPage} setPopUpPage={setPopUpPage} /> } >
+            <Route path="/" element={ <DefaultLayout popUpPage={popUpPage} setPopUpPage={setPopUpPage} /> } >
 
               <Route index element={ <MainLayout front={front} setFront={setFront} pages={pages} setPages={setPages} dirty={dirty} setDirty={setDirty} 
-                loading={loading} setLoading={setLoading} user={user} users={users} setUsers={setUsers} loggedIn={loggedIn} popUpPage={popUpPage} setPopUpPage={setPopUpPage}
+                loading={loading} setLoading={setLoading} user={user} loggedIn={loggedIn} popUpPage={popUpPage} setPopUpPage={setPopUpPage}
                 setSiteName={setSiteName} />} />
 
-              <Route path="/add" element={ <AddLayout user={user} users={users} setPages={setPages} setDirty={setDirty} setPopUpPage={setPopUpPage} />} />
+              <Route path="/add" element={ <AddLayout user={user} setPages={setPages} setDirty={setDirty} setPopUpPage={setPopUpPage} />} />
 
-              <Route path="/edit/:pageId" element={ <EditLayout user={user} users={users} pages={pages} setPages={setPages} setDirty={setDirty} setPopUpPage={setPopUpPage} />} />
+              <Route path="/edit/:pageId" element={ <EditLayout user={user} pages={pages} setPages={setPages} setDirty={setDirty} setPopUpPage={setPopUpPage} />} />
 
             </Route>
 

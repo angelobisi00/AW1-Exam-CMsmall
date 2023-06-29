@@ -6,7 +6,7 @@ const dayjs = require('dayjs');
 
 exports.listPages = (mode) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM pages';
+    const sql = 'SELECT pages.id, pages.title, pages.creationDate, pages.pubblicationDate, pages.content, users.email FROM pages JOIN users ON users.id = pages.author';
     db.all(sql, [], (err, rows) => {
       if(err) { reject(err);}
       
@@ -16,7 +16,7 @@ exports.listPages = (mode) => {
         const pages = rows.map((e) => ({
           id: e.id,
           title: e.title,
-          author: e.author,
+          author: e.email,
           creationDate: e.creationDate,
           pubblicationDate: e.pubblicationDate,
           content: JSON.parse(e.content)

@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function PagesTable(props) {
 
-  const userId = props.user && props.user.id;
+  const userId = props.user && props.user.username;
   const admin = props.user && props.user.amministratore;
   // console.log(userId + " " + admin)
   const allPages = props.pages;
@@ -118,7 +118,7 @@ function PageRow(props) {
 
       {/*Author*/}
       <td>
-        <p>{props.users.find(user => user.id === props.page.author)?.email}</p>
+        <p>{props.page.author}</p>
       </td>
       
       {/*Creation date*/}
